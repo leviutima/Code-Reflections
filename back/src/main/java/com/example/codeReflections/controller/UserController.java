@@ -52,10 +52,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public DadosListagemUsuario readOne(@PathVariable Long id) {
-        var usuario = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        return new DadosListagemUsuario(usuario);
+    public ResponseEntity readOne(@PathVariable Long id) {
+        var usuario = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoUsuario(usuario));
     }
 
     @PutMapping("/{id}")
